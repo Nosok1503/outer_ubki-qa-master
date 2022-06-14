@@ -1,0 +1,6 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Mon May 16 17:19:28 EEST 2022
+https\://artifactory.ubki.local\:8443/artifactory/libs-release/.error=
+https\://artifactory.ubki.local\:8443/artifactory/libs-release/.lastUpdated=1652710768740
+https\://artifactory.ubki.local\:8443/artifactory/libs-snapshot/.lastUpdated=1652710768747
+https\://artifactory.ubki.local\:8443/artifactory/libs-snapshot/.error=
