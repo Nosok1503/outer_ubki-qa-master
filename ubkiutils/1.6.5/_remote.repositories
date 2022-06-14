@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Thu Feb 03 13:02:04 EET 2022
+ubkiutils-1.6.5.jar>=
+ubkiutils-1.6.5.pom>=
+ubkiutils-1.6.5-sources.jar>=
