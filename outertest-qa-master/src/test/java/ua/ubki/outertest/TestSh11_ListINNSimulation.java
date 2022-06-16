@@ -26,9 +26,9 @@ import static io.gatling.javaapi.core.CoreDsl.*;
 import static io.gatling.javaapi.http.HttpDsl.http;
 import static io.gatling.javaapi.http.HttpDsl.status;
 
-public class TestSh10_ListINNSimulation extends Simulation {
+public class TestSh11_ListINNSimulation extends Simulation {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TestSh10_ListINNSimulation.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TestSh11_ListINNSimulation.class);
 
     private List<String> listINN = new ArrayList<>();
 
@@ -179,7 +179,7 @@ public class TestSh10_ListINNSimulation extends Simulation {
     @Override
     public void after() {
 
-        if (varresponseTime1 < varresponseTime2 && varresponseTime1 < varresponseTime3) {
+ /*       if (varresponseTime1 < varresponseTime2 && varresponseTime1 < varresponseTime3) {
             writeDataLineByLine(csvPath + "/log/LogUptimeSh10.csv", new String[]{requestTime1.format(DateTimeFormatter.ISO_DATE_TIME), String.valueOf(varresponseTime1), kodRequest1, shablonRequest1, textRequestError1});
         } else {
             if (varresponseTime2 < varresponseTime1 && varresponseTime2 < varresponseTime3) {
@@ -189,17 +189,17 @@ public class TestSh10_ListINNSimulation extends Simulation {
             }
 
         }
-
- /*       if (varresponseTime4 < varresponseTime5 && varresponseTime1 < varresponseTime6) {
-            writeDataLineByLine(csvPath + "/log/LogUptime.csv", new String[]{String.valueOf(requestTime4.format(DateTimeFormatter.ISO_DATE_TIME)), String.valueOf(varresponseTime4), kodRequest4, shablonRequest4, textRequestError4});
+*/
+        if (varresponseTime4 < varresponseTime5 && varresponseTime1 < varresponseTime6) {
+            writeDataLineByLine(csvPath + "/log/LogUptimeSh11.csv", new String[]{String.valueOf(requestTime4.format(DateTimeFormatter.ISO_DATE_TIME)), String.valueOf(varresponseTime4), kodRequest4, shablonRequest4, textRequestError4});
         } else {
             if (varresponseTime5 < varresponseTime4 && varresponseTime5 < varresponseTime6) {
-                writeDataLineByLine(csvPath + "/log/LogUptime.csv", new String[]{String.valueOf(requestTime5.format(DateTimeFormatter.ISO_DATE_TIME)), String.valueOf(varresponseTime5), kodRequest5, shablonRequest5, textRequestError5});
+                writeDataLineByLine(csvPath + "/log/LogUptimeSh11.csv", new String[]{String.valueOf(requestTime5.format(DateTimeFormatter.ISO_DATE_TIME)), String.valueOf(varresponseTime5), kodRequest5, shablonRequest5, textRequestError5});
             } else {
-                writeDataLineByLine(csvPath + "/log/LogUptime.csv", new String[]{String.valueOf(requestTime6.format(DateTimeFormatter.ISO_DATE_TIME)), String.valueOf(varresponseTime6), kodRequest6, shablonRequest6, textRequestError6});
+                writeDataLineByLine(csvPath + "/log/LogUptimeSh11.csv", new String[]{String.valueOf(requestTime6.format(DateTimeFormatter.ISO_DATE_TIME)), String.valueOf(varresponseTime6), kodRequest6, shablonRequest6, textRequestError6});
             }
 
-        }*/
+        }
 
 
         LOGGER.info("The test is finished");
@@ -633,14 +633,14 @@ public class TestSh10_ListINNSimulation extends Simulation {
 
     {
         setUp(authScn.injectOpen(atOnceUsers(1)).protocols()
-                .andThen(CheckB2Shablon10ForListINN.injectOpen(atOnceUsers(1)).protocols(httpProtocolB2)
-                        //                       .andThen(CheckB2Shablon11ForListINN.injectOpen(atOnceUsers(1)).protocols(httpProtocolB2)
+                        //               .andThen(CheckB2Shablon10ForListINN.injectOpen(atOnceUsers(1)).protocols(httpProtocolB2)
+                        .andThen(CheckB2Shablon11ForListINN.injectOpen(atOnceUsers(1)).protocols(httpProtocolB2)
 
 
-                        //                       )
+                        )
 
 
-                )
+                //               )
         )
                 .assertions(global().failedRequests().count().lt(1L));
 
