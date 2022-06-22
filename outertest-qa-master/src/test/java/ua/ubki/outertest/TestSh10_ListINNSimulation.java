@@ -180,17 +180,17 @@ public class TestSh10_ListINNSimulation extends Simulation {
     public void after() {
 
         if (varresponseTime1 < varresponseTime2 && varresponseTime1 < varresponseTime3) {
-            writeDataLineByLine(csvPath + "/log/LogUptimeSh10.csv", new String[]{requestTime1.format(DateTimeFormatter.ISO_DATE_TIME), String.valueOf(varresponseTime1), kodRequest1, shablonRequest1, textRequestError1});
+            writeDataLineByLine(csvPath + "/log/LogUptimeSh10.csv", new String[]{requestTime1.format(DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss")), String.valueOf(varresponseTime1), kodRequest1, shablonRequest1, textRequestError1});
         } else {
             if (varresponseTime2 < varresponseTime1 && varresponseTime2 < varresponseTime3) {
-                writeDataLineByLine(csvPath + "/log/LogUptimeSh10.csv", new String[]{requestTime2.format(DateTimeFormatter.ISO_DATE_TIME), String.valueOf(varresponseTime2), kodRequest2, shablonRequest2, textRequestError2});
+                writeDataLineByLine(csvPath + "/log/LogUptimeSh10.csv", new String[]{requestTime2.format(DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss")), String.valueOf(varresponseTime2), kodRequest2, shablonRequest2, textRequestError2});
             } else {
-                writeDataLineByLine(csvPath + "/log/LogUptimeSh10.csv", new String[]{requestTime3.format(DateTimeFormatter.ISO_DATE_TIME), String.valueOf(varresponseTime3), kodRequest3, shablonRequest3, textRequestError3});
+                writeDataLineByLine(csvPath + "/log/LogUptimeSh10.csv", new String[]{requestTime3.format(DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss")), String.valueOf(varresponseTime3), kodRequest3, shablonRequest3, textRequestError3});
             }
 
         }
 
- /*       if (varresponseTime4 < varresponseTime5 && varresponseTime1 < varresponseTime6) {
+ /*       if (varresponseTime4 < varresponseTime5 && varresponseTime4 < varresponseTime6) {
             writeDataLineByLine(csvPath + "/log/LogUptime.csv", new String[]{String.valueOf(requestTime4.format(DateTimeFormatter.ISO_DATE_TIME)), String.valueOf(varresponseTime4), kodRequest4, shablonRequest4, textRequestError4});
         } else {
             if (varresponseTime5 < varresponseTime4 && varresponseTime5 < varresponseTime6) {

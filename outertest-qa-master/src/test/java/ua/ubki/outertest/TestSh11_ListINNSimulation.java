@@ -2,6 +2,7 @@ package ua.ubki.outertest;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
+import io.gatling.javaapi.core.ChainBuilder;
 import io.gatling.javaapi.core.ScenarioBuilder;
 import io.gatling.javaapi.core.Simulation;
 import io.gatling.javaapi.http.HttpProtocolBuilder;
@@ -190,13 +191,13 @@ public class TestSh11_ListINNSimulation extends Simulation {
 
         }
 */
-        if (varresponseTime4 < varresponseTime5 && varresponseTime1 < varresponseTime6) {
-            writeDataLineByLine(csvPath + "/log/LogUptimeSh11.csv", new String[]{String.valueOf(requestTime4.format(DateTimeFormatter.ISO_DATE_TIME)), String.valueOf(varresponseTime4), kodRequest4, shablonRequest4, textRequestError4});
+        if (varresponseTime4 < varresponseTime5 && varresponseTime4 < varresponseTime6) {
+            writeDataLineByLine(csvPath + "/log/LogUptimeSh11.csv", new String[]{String.valueOf(requestTime4.format(DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss"))), String.valueOf(varresponseTime4), kodRequest4, shablonRequest4, textRequestError4});
         } else {
             if (varresponseTime5 < varresponseTime4 && varresponseTime5 < varresponseTime6) {
-                writeDataLineByLine(csvPath + "/log/LogUptimeSh11.csv", new String[]{String.valueOf(requestTime5.format(DateTimeFormatter.ISO_DATE_TIME)), String.valueOf(varresponseTime5), kodRequest5, shablonRequest5, textRequestError5});
+                writeDataLineByLine(csvPath + "/log/LogUptimeSh11.csv", new String[]{String.valueOf(requestTime5.format(DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss"))), String.valueOf(varresponseTime5), kodRequest5, shablonRequest5, textRequestError5});
             } else {
-                writeDataLineByLine(csvPath + "/log/LogUptimeSh11.csv", new String[]{String.valueOf(requestTime6.format(DateTimeFormatter.ISO_DATE_TIME)), String.valueOf(varresponseTime6), kodRequest6, shablonRequest6, textRequestError6});
+                writeDataLineByLine(csvPath + "/log/LogUptimeSh11.csv", new String[]{String.valueOf(requestTime6.format(DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss"))), String.valueOf(varresponseTime6), kodRequest6, shablonRequest6, textRequestError6});
             }
 
         }
@@ -502,8 +503,8 @@ public class TestSh11_ListINNSimulation extends Simulation {
                                 kodRequest5 = StringUtils.substringBetween(response.body().string(), "reqinfo reqid=\"", "\"");
 
                             }
-                            LOGGER.info("requestError2: {}", requestError5);
-                            LOGGER.info("textRequestError2: {}", textRequestError5);
+                            LOGGER.info("requestError5: {}", requestError5);
+                            LOGGER.info("textRequestError5: {}", textRequestError5);
 
                         } else {
                             requestError5 = true;
@@ -581,6 +582,174 @@ public class TestSh11_ListINNSimulation extends Simulation {
                 }
                 return session;
             });
+
+
+    ChainBuilder browse =
+            repeat(5, "n").on( // 1
+                    exec(http("Page #{n}").get("/computers?p=#{n}")) // 2
+                            .pause(1)
+            );
+
+
+    //ScenarioBuilder CheckB2Shablon11ForListINN60minutNew = scenario("Check Shablon 11 B2 for List INN")
+
+
+    ScenarioBuilder CheckB2Shablon11ForListINN60minut = scenario("Check Shablon 11 B2 for List INN")
+            .repeat(5).on(
+                    exec(session -> session.set("sessid", ubkiSession))
+//Запит №4 Шаблон 11
+                            .exec(session -> session.set("inn", "**RANDOM**"))
+                            .exec(http("Check B2 Shablon 11 for INN4")
+                                    .post("/xml")
+
+                                    .body(ElFileBody("data/Requvest11Shablon.xml"))
+                                    .transformResponse((response, session) -> {
+                                        if (response.status().code() == 200) {
+                                            statusCodeNot200 = false;
+                                            //LOGGER.info("Response w2 Sh10 Outer Simulation for List INN4: {} ", response.body().string());
+                                            if (response.body().string().indexOf("Код [", 0) > 0) {
+                                                requestError4 = true;
+                                                textRequestError4 = StringUtils.substringBetween(response.body().string(), "Код [", "]");
+                                            } else {
+                                                requestError4 = false;
+                                                textRequestError4 = "";
+                                                kodRequest4 = StringUtils.substringBetween(response.body().string(), "reqinfo reqid=\"", "\"");
+                                            }
+                                            LOGGER.info("requestError4: {}", requestError4);
+                                            LOGGER.info("textRequestError4: {}", textRequestError4);
+
+                                        } else {
+                                            requestError4 = true;
+                                            textRequestError4 = String.valueOf(response.status().code());
+                                            statusCodeNot200 = true;
+                                        }
+                                        requestTime4 = LocalDateTime.now();
+                                        shablonRequest4 = "11";
+                                        LOGGER.info("inn4: {}", session.getString("inn"));
+
+                                        return response;
+                                    })
+                                    .check(responseTimeInMillis().saveAs("responseTime4"))
+
+                            )
+                            .exec(session -> {
+                                if (statusCodeNot200) {
+                                    varresponseTime4 = 1000000;
+                                } else {
+                                    varresponseTime4 = session.getInt("responseTime4");
+                                    LOGGER.info("responseTime4: {} ", varresponseTime4);
+                                }
+                                return session;
+                            })
+                            .exec(session -> {
+                                LOGGER.info("varresponseTime4 < maxDelayTime && !requestError4: {} ", varresponseTime4 < maxDelayTime11Sh && !requestError4);
+                                return session.set("commandExit", varresponseTime4 < maxDelayTime11Sh && !requestError4);
+                            })
+                            .exitHereIf(session -> {
+                                LOGGER.info("commandExit: {} ", session.getBoolean("commandExit"));
+                                return session.getBoolean("commandExit");
+                            })
+//Запит №5  Шаблон 11
+                            .exec(session -> session.set("inn", "**RANDOM**"))
+                            .exec(http("Check B2 Shablon 11 for INN5")
+                                    .post("/xml")
+
+                                    .body(ElFileBody("data/Requvest11Shablon.xml"))
+                                    .transformResponse((response, session) -> {
+                                        if (response.status().code() == 200) {
+                                            statusCodeNot200 = false;
+                                            //LOGGER.info("Response w2 Sh10 Outer Simulation for List INN5: {} ", response.body().string());
+                                            if (response.body().string().indexOf("Код [", 0) > 0) {
+                                                requestError5 = true;
+                                                textRequestError5 = StringUtils.substringBetween(response.body().string(), "Код [", "]");
+                                            } else {
+                                                requestError5 = false;
+                                                textRequestError5 = "";
+                                                kodRequest5 = StringUtils.substringBetween(response.body().string(), "reqinfo reqid=\"", "\"");
+
+                                            }
+                                            LOGGER.info("requestError2: {}", requestError5);
+                                            LOGGER.info("textRequestError2: {}", textRequestError5);
+
+                                        } else {
+                                            requestError5 = true;
+                                            textRequestError5 = String.valueOf(response.status().code());
+                                            statusCodeNot200 = true;
+                                        }
+                                        requestTime5 = LocalDateTime.now();
+                                        shablonRequest5 = "11";
+                                        LOGGER.info("inn5: {}", session.getString("inn"));
+
+                                        return response;
+                                    })
+                                    .check(responseTimeInMillis().saveAs("responseTime5"))
+
+                            )
+                            .exec(session -> {
+                                if (statusCodeNot200) {
+                                    varresponseTime5 = 1000000;
+                                } else {
+                                    varresponseTime5 = session.getInt("responseTime5");
+                                    LOGGER.info("responseTime5: {} ", varresponseTime5);
+                                }
+                                return session;
+                            })
+                            .exec(session -> {
+                                LOGGER.info("varresponseTime5 < maxDelayTime && !requestError5: {} ", varresponseTime5 < maxDelayTime11Sh && !requestError5);
+                                return session.set("commandExit", varresponseTime5 < maxDelayTime11Sh && !requestError5);
+                            })
+                            .exitHereIf(session -> {
+                                LOGGER.info("commandExit: {} ", session.getBoolean("commandExit"));
+                                return session.getBoolean("commandExit");
+                            })
+//Запит №6  Шаблон 11
+                            .exec(session -> session.set("inn", "**RANDOM**"))
+                            .exec(http("Check B2 Shablon 11 for INN6")
+                                    .post("/xml")
+
+                                    .body(ElFileBody("data/Requvest11Shablon.xml"))
+                                    .transformResponse((response, session) -> {
+                                        if (response.status().code() == 200) {
+                                            statusCodeNot200 = false;
+                                            //LOGGER.info("Response w2 Sh10 Outer Simulation for List INN3: {} ", response.body().string());
+                                            if (response.body().string().indexOf("Код [", 0) > 0) {
+                                                requestError6 = true;
+                                                textRequestError6 = StringUtils.substringBetween(response.body().string(), "Код [", "]");
+                                            } else {
+                                                requestError6 = false;
+                                                textRequestError6 = "";
+                                                kodRequest6 = StringUtils.substringBetween(response.body().string(), "reqinfo reqid=\"", "\"");
+
+                                            }
+                                            LOGGER.info("requestError6: {}", requestError6);
+                                            LOGGER.info("textRequestError6: {}", textRequestError6);
+
+                                        } else {
+                                            requestError6 = true;
+                                            textRequestError6 = String.valueOf(response.status().code());
+                                            statusCodeNot200 = true;
+                                        }
+                                        requestTime6 = LocalDateTime.now();
+                                        shablonRequest6 = "11";
+                                        LOGGER.info("inn6: {}", session.getString("inn"));
+
+                                        return response;
+                                    })
+                                    .check(responseTimeInMillis().saveAs("responseTime6"))
+
+                            )
+                            .exec(session -> {
+                                if (statusCodeNot200) {
+                                    varresponseTime6 = 1000000;
+                                } else {
+                                    varresponseTime6 = session.getInt("responseTime6");
+                                    LOGGER.info("responseTime6: {} ", varresponseTime6);
+                                }
+                                return session;
+                            })
+
+
+            );
 
 
     ScenarioBuilder CheckB2Shablon11Once = scenario("Check Shablon 11 B2 for List INN")
