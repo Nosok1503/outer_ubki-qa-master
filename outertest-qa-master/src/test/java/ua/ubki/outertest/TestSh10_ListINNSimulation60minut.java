@@ -92,15 +92,7 @@ public class TestSh10_ListINNSimulation60minut extends Simulation {
     String dayBeforeYesterday = java.time.LocalDate.now().minusDays(2).toString();
     private String csvPath;
     long milliseconds;
-    /*           = date2.getTime() - date1.getTime();
-               System.out.println("\nРазница между датами в миллисекундах: " + milliseconds);
-   */
-    // 1000 миллисекунд = 1 секунда
-    int seconds;
-//         = (int (milliseconds / (1000));
-/*
-            System.out.println("Разница между датами в секундах: " + seconds);
-*/
+
 
 
     @Override
@@ -108,16 +100,6 @@ public class TestSh10_ListINNSimulation60minut extends Simulation {
         LOGGER.info("Tests begin");
         PropertiesProvider ubkiProperties = PropertiesProvider.getInstance("outertest.properties");
         csvPath = ubkiProperties.getPropertyAsString("path.to.csv", "C://ubki//GitLab//outertest-qa//src//docs");
-//        readDataLineByLine(csvPath + "/data/ListIPN.csv");
-
- /*       String inn1 = listINN.get(RandomUtils.nextInt(0, listINN.size()));
-        String inn2 = listINN.get(RandomUtils.nextInt(0, listINN.size()));
-        String inn3 = listINN.get(RandomUtils.nextInt(0, listINN.size()));
-        String inn4 = listINN.get(RandomUtils.nextInt(0, listINN.size()));
-        String inn5 = listINN.get(RandomUtils.nextInt(0, listINN.size()));
-        String inn6 = listINN.get(RandomUtils.nextInt(0, listINN.size()));
-*/
-
     }
 
 
@@ -299,9 +281,9 @@ public class TestSh10_ListINNSimulation60minut extends Simulation {
                                         if (response.status().code() == 200) {
                                             statusCodeNot200 = false;
                                             //LOGGER.info("Response w2 Sh10 Outer Simulation for List INN1: {} ", response.body().string());
-                                            if (response.body().string().indexOf("Код [", 0) > 0) {
+                                            if ((response.body().string().indexOf("<error", 0) > 0) & (response.body().string().indexOf("errtext", 0) > 0) & (response.body().string().indexOf("errtype=", 0) > 0)) {
                                                 requestError1 = true;
-                                                textRequestError1 = StringUtils.substringBetween(response.body().string(), "Код [", "]");
+                                                textRequestError1 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
                                             } else {
                                                 requestError1 = false;
                                                 textRequestError1 = "";
@@ -353,9 +335,9 @@ public class TestSh10_ListINNSimulation60minut extends Simulation {
                                                         if (response.status().code() == 200) {
                                                             statusCodeNot200 = false;
                                                             //LOGGER.info("Response w2 Sh10 Outer Simulation for List INN2: {} ", response.body().string());
-                                                            if (response.body().string().indexOf("Код [", 0) > 0) {
+                                                            if ((response.body().string().indexOf("<error", 0) > 0) & (response.body().string().indexOf("errtext", 0) > 0) & (response.body().string().indexOf("errtype=", 0) > 0)) {
                                                                 requestError2 = true;
-                                                                textRequestError2 = StringUtils.substringBetween(response.body().string(), "Код [", "]");
+                                                                textRequestError2 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
                                                             } else {
                                                                 requestError2 = false;
                                                                 textRequestError2 = "";
@@ -407,9 +389,9 @@ public class TestSh10_ListINNSimulation60minut extends Simulation {
                                                         if (response.status().code() == 200) {
                                                             statusCodeNot200 = false;
                                                             //LOGGER.info("Response w2 Sh10 Outer Simulation for List INN3: {} ", response.body().string());
-                                                            if (response.body().string().indexOf("Код [", 0) > 0) {
+                                                            if ((response.body().string().indexOf("<error", 0) > 0) & (response.body().string().indexOf("errtext", 0) > 0) & (response.body().string().indexOf("errtype=", 0) > 0)) {
                                                                 requestError3 = true;
-                                                                textRequestError3 = StringUtils.substringBetween(response.body().string(), "Код [", "]");
+                                                                textRequestError3 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
                                                             } else {
                                                                 requestError3 = false;
                                                                 textRequestError3 = "";

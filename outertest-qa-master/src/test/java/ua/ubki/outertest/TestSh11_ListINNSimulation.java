@@ -284,9 +284,9 @@ public class TestSh11_ListINNSimulation extends Simulation {
                         if (response.status().code() == 200) {
                             statusCodeNot200 = false;
                             //LOGGER.info("Response w2 Sh10 Outer Simulation for List INN1: {} ", response.body().string());
-                            if (response.body().string().indexOf("Код [", 0) > 0) {
+                            if ((response.body().string().indexOf("<error", 0) > 0) & (response.body().string().indexOf("errtext", 0) > 0) & (response.body().string().indexOf("errtype=", 0) > 0)) {
                                 requestError1 = true;
-                                textRequestError1 = StringUtils.substringBetween(response.body().string(), "Код [", "]");
+                                textRequestError1 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
                             } else {
                                 requestError1 = false;
                                 textRequestError1 = "";
@@ -338,9 +338,9 @@ public class TestSh11_ListINNSimulation extends Simulation {
                         if (response.status().code() == 200) {
                             statusCodeNot200 = false;
                             //LOGGER.info("Response w2 Sh10 Outer Simulation for List INN2: {} ", response.body().string());
-                            if (response.body().string().indexOf("Код [", 0) > 0) {
+                            if ((response.body().string().indexOf("<error", 0) > 0) & (response.body().string().indexOf("errtext", 0) > 0) & (response.body().string().indexOf("errtype=", 0) > 0)) {
                                 requestError2 = true;
-                                textRequestError2 = StringUtils.substringBetween(response.body().string(), "Код [", "]");
+                                textRequestError2 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
                             } else {
                                 requestError2 = false;
                                 textRequestError2 = "";
@@ -392,9 +392,9 @@ public class TestSh11_ListINNSimulation extends Simulation {
                         if (response.status().code() == 200) {
                             statusCodeNot200 = false;
                             //LOGGER.info("Response w2 Sh10 Outer Simulation for List INN3: {} ", response.body().string());
-                            if (response.body().string().indexOf("Код [", 0) > 0) {
+                            if ((response.body().string().indexOf("<error", 0) > 0) & (response.body().string().indexOf("errtext", 0) > 0) & (response.body().string().indexOf("errtype=", 0) > 0)) {
                                 requestError3 = true;
-                                textRequestError3 = StringUtils.substringBetween(response.body().string(), "Код [", "]");
+                                textRequestError3 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
                             } else {
                                 requestError3 = false;
                                 textRequestError3 = "";
@@ -439,12 +439,14 @@ public class TestSh11_ListINNSimulation extends Simulation {
 
                     .body(ElFileBody("data/Requvest11Shablon.xml"))
                     .transformResponse((response, session) -> {
+//                         LOGGER.info("Response w2 Sh11 Outer Simulation for List INN4: {} ", response.body().string());
+
                         if (response.status().code() == 200) {
                             statusCodeNot200 = false;
-                            //LOGGER.info("Response w2 Sh10 Outer Simulation for List INN4: {} ", response.body().string());
-                            if (response.body().string().indexOf("Код [", 0) > 0) {
+                            //                           LOGGER.info("Response w2 Sh10 Outer Simulation for List INN4: {} ", response.body().string());
+                            if ((response.body().string().indexOf("<error", 0) > 0) & (response.body().string().indexOf("errtext", 0) > 0) & (response.body().string().indexOf("errtype=", 0) > 0)) {
                                 requestError4 = true;
-                                textRequestError4 = StringUtils.substringBetween(response.body().string(), "Код [", "]");
+                                textRequestError4 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
                             } else {
                                 requestError4 = false;
                                 textRequestError4 = "";
@@ -494,9 +496,9 @@ public class TestSh11_ListINNSimulation extends Simulation {
                         if (response.status().code() == 200) {
                             statusCodeNot200 = false;
                             //LOGGER.info("Response w2 Sh10 Outer Simulation for List INN5: {} ", response.body().string());
-                            if (response.body().string().indexOf("Код [", 0) > 0) {
+                            if ((response.body().string().indexOf("<error", 0) > 0) & (response.body().string().indexOf("errtext", 0) > 0) & (response.body().string().indexOf("errtype=", 0) > 0)) {
                                 requestError5 = true;
-                                textRequestError5 = StringUtils.substringBetween(response.body().string(), "Код [", "]");
+                                textRequestError5 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
                             } else {
                                 requestError5 = false;
                                 textRequestError5 = "";
@@ -547,9 +549,9 @@ public class TestSh11_ListINNSimulation extends Simulation {
                         if (response.status().code() == 200) {
                             statusCodeNot200 = false;
                             //LOGGER.info("Response w2 Sh10 Outer Simulation for List INN3: {} ", response.body().string());
-                            if (response.body().string().indexOf("Код [", 0) > 0) {
+                            if ((response.body().string().indexOf("<error", 0) > 0) & (response.body().string().indexOf("errtext", 0) > 0) & (response.body().string().indexOf("errtype=", 0) > 0)) {
                                 requestError6 = true;
-                                textRequestError6 = StringUtils.substringBetween(response.body().string(), "Код [", "]");
+                                textRequestError6 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
                             } else {
                                 requestError6 = false;
                                 textRequestError6 = "";
@@ -604,12 +606,14 @@ public class TestSh11_ListINNSimulation extends Simulation {
 
                                     .body(ElFileBody("data/Requvest11Shablon.xml"))
                                     .transformResponse((response, session) -> {
+                                        //                                       LOGGER.info("Response w2 Sh11 Outer Simulation for List INN4: {} ", response.body().string());
+
                                         if (response.status().code() == 200) {
                                             statusCodeNot200 = false;
-                                            //LOGGER.info("Response w2 Sh10 Outer Simulation for List INN4: {} ", response.body().string());
-                                            if (response.body().string().indexOf("Код [", 0) > 0) {
+//                                            LOGGER.info("Response w2 Sh11 Outer Simulation for List INN4: {} ", response.body().string());
+                                            if ((response.body().string().indexOf("<error", 0) > 0) & (response.body().string().indexOf("errtext", 0) > 0) & (response.body().string().indexOf("errtype=", 0) > 0)) {
                                                 requestError4 = true;
-                                                textRequestError4 = StringUtils.substringBetween(response.body().string(), "Код [", "]");
+                                                textRequestError4 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
                                             } else {
                                                 requestError4 = false;
                                                 textRequestError4 = "";
@@ -619,6 +623,7 @@ public class TestSh11_ListINNSimulation extends Simulation {
                                             LOGGER.info("textRequestError4: {}", textRequestError4);
 
                                         } else {
+                                            //                                           LOGGER.info("Response w2 Sh11 Outer Simulation for List INN4: {} ", response.body().string());
                                             requestError4 = true;
                                             textRequestError4 = String.valueOf(response.status().code());
                                             statusCodeNot200 = true;
@@ -659,9 +664,9 @@ public class TestSh11_ListINNSimulation extends Simulation {
                                         if (response.status().code() == 200) {
                                             statusCodeNot200 = false;
                                             //LOGGER.info("Response w2 Sh10 Outer Simulation for List INN5: {} ", response.body().string());
-                                            if (response.body().string().indexOf("Код [", 0) > 0) {
+                                            if ((response.body().string().indexOf("<error", 0) > 0) & (response.body().string().indexOf("errtext", 0) > 0) & (response.body().string().indexOf("errtype=", 0) > 0)) {
                                                 requestError5 = true;
-                                                textRequestError5 = StringUtils.substringBetween(response.body().string(), "Код [", "]");
+                                                textRequestError5 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
                                             } else {
                                                 requestError5 = false;
                                                 textRequestError5 = "";
@@ -712,9 +717,9 @@ public class TestSh11_ListINNSimulation extends Simulation {
                                         if (response.status().code() == 200) {
                                             statusCodeNot200 = false;
                                             //LOGGER.info("Response w2 Sh10 Outer Simulation for List INN3: {} ", response.body().string());
-                                            if (response.body().string().indexOf("Код [", 0) > 0) {
+                                            if ((response.body().string().indexOf("<error", 0) > 0) & (response.body().string().indexOf("errtext", 0) > 0) & (response.body().string().indexOf("errtype=", 0) > 0)) {
                                                 requestError6 = true;
-                                                textRequestError6 = StringUtils.substringBetween(response.body().string(), "Код [", "]");
+                                                textRequestError6 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
                                             } else {
                                                 requestError6 = false;
                                                 textRequestError6 = "";

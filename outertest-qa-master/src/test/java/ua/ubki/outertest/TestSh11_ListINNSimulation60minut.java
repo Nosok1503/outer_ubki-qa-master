@@ -332,9 +332,9 @@ public class TestSh11_ListINNSimulation60minut extends Simulation {
                                         if (response.status().code() == 200) {
                                             statusCodeNot200 = false;
                                             LOGGER.info("Response w2 Sh10 Outer Simulation for List INN4: {} ", response.body().string());
-                                            if (response.body().string().indexOf("Код [", 0) > 0) {
+                                            if ((response.body().string().indexOf("<error", 0) > 0) & (response.body().string().indexOf("errtext", 0) > 0) & (response.body().string().indexOf("errtype=", 0) > 0)) {
                                                 requestError4 = true;
-                                                textRequestError4 = StringUtils.substringBetween(response.body().string(), "Код [", "]");
+                                                textRequestError4 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
                                             } else {
                                                 requestError4 = false;
                                                 textRequestError4 = "";
@@ -377,11 +377,7 @@ public class TestSh11_ListINNSimulation60minut extends Simulation {
                                 return session.getBoolean("commandExit");
                             }).then(
 
- /*           .exitHereIf(session -> {
-                LOGGER.info("commandExit: {} ", session.getBoolean("commandExit"));
-                return session.getBoolean("commandExit");
-            })
-*///Запит №5  Шаблон 11
+//Запит №5  Шаблон 11
                                     exec(session -> session.set("inn", "**RANDOM**"))
                                             .exec(http("Check B2 Shablon 11 for INN5")
                                                     .post("/xml")
@@ -391,9 +387,9 @@ public class TestSh11_ListINNSimulation60minut extends Simulation {
                                                         if (response.status().code() == 200) {
                                                             statusCodeNot200 = false;
                                                             LOGGER.info("Response w2 Sh10 Outer Simulation for List INN5: {} ", response.body().string());
-                                                            if (response.body().string().indexOf("Код [", 0) > 0) {
+                                                            if ((response.body().string().indexOf("<error", 0) > 0) & (response.body().string().indexOf("errtext", 0) > 0) & (response.body().string().indexOf("errtype=", 0) > 0)) {
                                                                 requestError5 = true;
-                                                                textRequestError5 = StringUtils.substringBetween(response.body().string(), "Код [", "]");
+                                                                textRequestError5 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
                                                             } else {
                                                                 requestError5 = false;
                                                                 textRequestError5 = "";
@@ -437,10 +433,7 @@ public class TestSh11_ListINNSimulation60minut extends Simulation {
                                 return session.getBoolean("commandExit");
                             }).then(
 
-/*            .exitHereIf(session -> {
-                LOGGER.info("commandExit: {} ", session.getBoolean("commandExit"));
-                return session.getBoolean("commandExit");
-            })*/
+
 //Запит №6  Шаблон 11
                                     exec(session -> session.set("inn", "**RANDOM**"))
                                             .exec(http("Check B2 Shablon 11 for INN6")
@@ -451,9 +444,9 @@ public class TestSh11_ListINNSimulation60minut extends Simulation {
                                                         if (response.status().code() == 200) {
                                                             statusCodeNot200 = false;
                                                             LOGGER.info("Response w2 Sh10 Outer Simulation for List INN6: {} ", response.body().string());
-                                                            if (response.body().string().indexOf("Код [", 0) > 0) {
+                                                            if ((response.body().string().indexOf("<error", 0) > 0) & (response.body().string().indexOf("errtext", 0) > 0) & (response.body().string().indexOf("errtype=", 0) > 0)) {
                                                                 requestError6 = true;
-                                                                textRequestError6 = StringUtils.substringBetween(response.body().string(), "Код [", "]");
+                                                                textRequestError6 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
                                                             } else {
                                                                 requestError6 = false;
                                                                 textRequestError6 = "";
