@@ -81,6 +81,14 @@ public class TestSh11_ListINNSimulation extends Simulation {
     String textRequestError5 = "";
     String textRequestError6 = "";
 
+    String textResponceError1 = "";
+    String textResponceError2 = "";
+    String textResponceError3 = "";
+    String textResponceError4 = "";
+    String textResponceError5 = "";
+    String textResponceError6 = "";
+
+
     String ubkiSession = "";
     String today = java.time.LocalDate.now().minusDays(0).toString();
     String yesterday = java.time.LocalDate.now().minusDays(1).toString();
@@ -202,6 +210,19 @@ public class TestSh11_ListINNSimulation extends Simulation {
 
         }
 
+        if (!(textResponceError4 == "")) {
+            writeDataLineByLine(csvPath + "/log/LogErrUptimeSh11.csv", new String[]{requestTime4.format(DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss")), String.valueOf(varresponseTime4), shablonRequest4, textResponceError4});
+        }
+        ;
+        if (!(textResponceError5 == "")) {
+            writeDataLineByLine(csvPath + "/log/LogErrUptimeSh11.csv", new String[]{requestTime5.format(DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss")), String.valueOf(varresponseTime5), shablonRequest5, textResponceError5});
+        }
+        ;
+        if (!(textResponceError6 == "")) {
+            writeDataLineByLine(csvPath + "/log/LogErrUptimeSh11.csv", new String[]{requestTime6.format(DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss")), String.valueOf(varresponseTime6), shablonRequest6, textResponceError6});
+        }
+        ;
+
 
         LOGGER.info("The test is finished");
     }
@@ -291,6 +312,7 @@ public class TestSh11_ListINNSimulation extends Simulation {
                                 requestError1 = false;
                                 textRequestError1 = "";
                                 kodRequest1 = StringUtils.substringBetween(response.body().string(), "reqinfo reqid=\"", "\"");
+
                             }
                             LOGGER.info("requestError1: {}", requestError1);
                             LOGGER.info("textRequestError1: {}", textRequestError1);
@@ -447,10 +469,18 @@ public class TestSh11_ListINNSimulation extends Simulation {
                             if ((response.body().string().indexOf("<error", 0) > 0) & (response.body().string().indexOf("errtext", 0) > 0) & (response.body().string().indexOf("errtype=", 0) > 0)) {
                                 requestError4 = true;
                                 textRequestError4 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
+                                if (textRequestError4 == "") {
+                                    textResponceError4 = response.body().string();
+                                }
                             } else {
                                 requestError4 = false;
                                 textRequestError4 = "";
                                 kodRequest4 = StringUtils.substringBetween(response.body().string(), "reqinfo reqid=\"", "\"");
+                                if (kodRequest4 == "") {
+                                    textResponceError4 = response.body().string();
+                                }
+
+
                             }
                             LOGGER.info("requestError4: {}", requestError4);
                             LOGGER.info("textRequestError4: {}", textRequestError4);
@@ -459,6 +489,9 @@ public class TestSh11_ListINNSimulation extends Simulation {
                             requestError4 = true;
                             textRequestError4 = String.valueOf(response.status().code());
                             statusCodeNot200 = true;
+                            if (textRequestError4 == "") {
+                                textResponceError4 = response.body().string();
+                            }
                         }
                         requestTime4 = LocalDateTime.now();
                         shablonRequest4 = "11";
@@ -499,10 +532,16 @@ public class TestSh11_ListINNSimulation extends Simulation {
                             if ((response.body().string().indexOf("<error", 0) > 0) & (response.body().string().indexOf("errtext", 0) > 0) & (response.body().string().indexOf("errtype=", 0) > 0)) {
                                 requestError5 = true;
                                 textRequestError5 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
+                                if (textRequestError5 == "") {
+                                    textResponceError5 = response.body().string();
+                                }
                             } else {
                                 requestError5 = false;
                                 textRequestError5 = "";
                                 kodRequest5 = StringUtils.substringBetween(response.body().string(), "reqinfo reqid=\"", "\"");
+                                if (kodRequest5 == "") {
+                                    textResponceError5 = response.body().string();
+                                }
 
                             }
                             LOGGER.info("requestError5: {}", requestError5);
@@ -512,6 +551,9 @@ public class TestSh11_ListINNSimulation extends Simulation {
                             requestError5 = true;
                             textRequestError5 = String.valueOf(response.status().code());
                             statusCodeNot200 = true;
+                            if (textRequestError5 == "") {
+                                textResponceError5 = response.body().string();
+                            }
                         }
                         requestTime5 = LocalDateTime.now();
                         shablonRequest5 = "11";
@@ -552,10 +594,17 @@ public class TestSh11_ListINNSimulation extends Simulation {
                             if ((response.body().string().indexOf("<error", 0) > 0) & (response.body().string().indexOf("errtext", 0) > 0) & (response.body().string().indexOf("errtype=", 0) > 0)) {
                                 requestError6 = true;
                                 textRequestError6 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
+                                if (textRequestError6 == "") {
+                                    textResponceError6 = response.body().string();
+                                }
                             } else {
                                 requestError6 = false;
                                 textRequestError6 = "";
                                 kodRequest6 = StringUtils.substringBetween(response.body().string(), "reqinfo reqid=\"", "\"");
+                                if (kodRequest6 == "") {
+                                    textResponceError6 = response.body().string();
+                                }
+
 
                             }
                             LOGGER.info("requestError6: {}", requestError6);
@@ -565,6 +614,9 @@ public class TestSh11_ListINNSimulation extends Simulation {
                             requestError6 = true;
                             textRequestError6 = String.valueOf(response.status().code());
                             statusCodeNot200 = true;
+                            if (textRequestError6 == "") {
+                                textResponceError6 = response.body().string();
+                            }
                         }
                         requestTime6 = LocalDateTime.now();
                         shablonRequest6 = "11";

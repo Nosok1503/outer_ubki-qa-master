@@ -80,6 +80,14 @@ public class TestSh10_ListINNSimulation extends Simulation {
     String textRequestError5 = "";
     String textRequestError6 = "";
 
+    String textResponceError1 = "";
+    String textResponceError2 = "";
+    String textResponceError3 = "";
+    String textResponceError4 = "";
+    String textResponceError5 = "";
+    String textResponceError6 = "";
+
+
     String ubkiSession = "";
     String today = java.time.LocalDate.now().minusDays(0).toString();
     String yesterday = java.time.LocalDate.now().minusDays(1).toString();
@@ -189,6 +197,23 @@ public class TestSh10_ListINNSimulation extends Simulation {
             }
 
         }
+        ;
+
+        if (!(textResponceError1 == "")) {
+            writeDataLineByLine(csvPath + "/log/LogErrUptimeSh10.csv", new String[]{requestTime1.format(DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss")), String.valueOf(varresponseTime1), shablonRequest1, textResponceError1});
+        }
+        ;
+        if (!(textResponceError2 == "")) {
+            writeDataLineByLine(csvPath + "/log/LogErrUptimeSh10.csv", new String[]{requestTime2.format(DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss")), String.valueOf(varresponseTime2), shablonRequest2, textResponceError2});
+        }
+        ;
+        if (!(textResponceError3 == "")) {
+            writeDataLineByLine(csvPath + "/log/LogErrUptimeSh10.csv", new String[]{requestTime3.format(DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss")), String.valueOf(varresponseTime3), shablonRequest3, textResponceError2});
+        }
+        ;
+
+
+
 
  /*       if (varresponseTime4 < varresponseTime5 && varresponseTime4 < varresponseTime6) {
             writeDataLineByLine(csvPath + "/log/LogUptime.csv", new String[]{String.valueOf(requestTime4.format(DateTimeFormatter.ISO_DATE_TIME)), String.valueOf(varresponseTime4), kodRequest4, shablonRequest4, textRequestError4});
@@ -286,10 +311,19 @@ public class TestSh10_ListINNSimulation extends Simulation {
                             if ((response.body().string().indexOf("<error", 0) > 0) & (response.body().string().indexOf("errtext", 0) > 0) & (response.body().string().indexOf("errtype=", 0) > 0)) {
                                 requestError1 = true;
                                 textRequestError1 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
+                                if (textRequestError1 == "") {
+                                    textResponceError1 = response.body().string();
+                                }
+//                                textResponceError1=response.body().string();
+
                             } else {
                                 requestError1 = false;
                                 textRequestError1 = "";
                                 kodRequest1 = StringUtils.substringBetween(response.body().string(), "reqinfo reqid=\"", "\"");
+                                textResponceError1 = response.body().string();
+                                if (kodRequest1 == "") {
+                                    textResponceError1 = response.body().string();
+                                }
                             }
                             LOGGER.info("requestError1: {}", requestError1);
                             LOGGER.info("textRequestError1: {}", textRequestError1);
@@ -298,6 +332,10 @@ public class TestSh10_ListINNSimulation extends Simulation {
                             requestError1 = true;
                             textRequestError1 = String.valueOf(response.status().code());
                             statusCodeNot200 = true;
+                            if (textRequestError1 == "") {
+                                textResponceError1 = response.body().string();
+                            }
+
                         }
                         requestTime1 = LocalDateTime.now();
                         shablonRequest1 = "10";
@@ -340,11 +378,17 @@ public class TestSh10_ListINNSimulation extends Simulation {
                             if ((response.body().string().indexOf("<error", 0) > 0) & (response.body().string().indexOf("errtext", 0) > 0) & (response.body().string().indexOf("errtype=", 0) > 0)) {
                                 requestError2 = true;
                                 textRequestError2 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
+                                if (textRequestError2 == "") {
+                                    textResponceError2 = response.body().string();
+                                }
+                                //                               textResponceError2=response.body().string();
                             } else {
                                 requestError2 = false;
                                 textRequestError2 = "";
                                 kodRequest2 = StringUtils.substringBetween(response.body().string(), "reqinfo reqid=\"", "\"");
-
+                                if (kodRequest2 == "") {
+                                    textResponceError2 = response.body().string();
+                                }
                             }
                             LOGGER.info("requestError2: {}", requestError2);
                             LOGGER.info("textRequestError2: {}", textRequestError2);
@@ -353,6 +397,10 @@ public class TestSh10_ListINNSimulation extends Simulation {
                             requestError2 = true;
                             textRequestError2 = String.valueOf(response.status().code());
                             statusCodeNot200 = true;
+                            if (textRequestError2 == "") {
+                                textResponceError2 = response.body().string();
+                            }
+
                         }
                         requestTime2 = LocalDateTime.now();
                         shablonRequest2 = "10";
@@ -394,11 +442,17 @@ public class TestSh10_ListINNSimulation extends Simulation {
                             if ((response.body().string().indexOf("<error", 0) > 0) & (response.body().string().indexOf("errtext", 0) > 0) & (response.body().string().indexOf("errtype=", 0) > 0)) {
                                 requestError3 = true;
                                 textRequestError3 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
+                                if (textRequestError3 == "") {
+                                    textResponceError3 = response.body().string();
+                                }
+//                                 textResponceError3=response.body().string();
                             } else {
                                 requestError3 = false;
                                 textRequestError3 = "";
                                 kodRequest3 = StringUtils.substringBetween(response.body().string(), "reqinfo reqid=\"", "\"");
-
+                                if (kodRequest3 == "") {
+                                    textResponceError3 = response.body().string();
+                                }
                             }
                             LOGGER.info("requestError3: {}", requestError3);
                             LOGGER.info("textRequestError3: {}", textRequestError3);
@@ -407,6 +461,10 @@ public class TestSh10_ListINNSimulation extends Simulation {
                             requestError3 = true;
                             textRequestError3 = String.valueOf(response.status().code());
                             statusCodeNot200 = true;
+                            if (textRequestError3 == "") {
+                                textResponceError3 = response.body().string();
+                            }
+
                         }
                         requestTime3 = LocalDateTime.now();
                         shablonRequest3 = "10";
