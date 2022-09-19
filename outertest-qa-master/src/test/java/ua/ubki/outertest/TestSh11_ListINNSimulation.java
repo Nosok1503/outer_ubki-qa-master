@@ -470,14 +470,22 @@ public class TestSh11_ListINNSimulation extends Simulation {
                                 requestError4 = true;
                                 textRequestError4 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
                                 if (textRequestError4 == "") {
-                                    textResponceError4 = response.body().string();
+                                    if (response.body().string() == "") {
+                                        textResponceError4 = "Відповідь response.body() пуста";
+                                    } else {
+                                        textResponceError4 = response.body().string();
+                                    }
                                 }
                             } else {
                                 requestError4 = false;
                                 textRequestError4 = "";
                                 kodRequest4 = StringUtils.substringBetween(response.body().string(), "reqinfo reqid=\"", "\"");
                                 if (kodRequest4 == "") {
-                                    textResponceError4 = response.body().string();
+                                    if (response.body().string() == "") {
+                                        textResponceError4 = "Відповідь response.body() пуста";
+                                    } else {
+                                        textResponceError4 = response.body().string();
+                                    }
                                 }
 
 
@@ -490,7 +498,11 @@ public class TestSh11_ListINNSimulation extends Simulation {
                             textRequestError4 = String.valueOf(response.status().code());
                             statusCodeNot200 = true;
                             if (textRequestError4 == "") {
-                                textResponceError4 = response.body().string();
+                                if (response.body().string() == "") {
+                                    textResponceError4 = "Відповідь response.body() пуста";
+                                } else {
+                                    textResponceError4 = response.body().string();
+                                }
                             }
                         }
                         requestTime4 = LocalDateTime.now();
@@ -533,14 +545,22 @@ public class TestSh11_ListINNSimulation extends Simulation {
                                 requestError5 = true;
                                 textRequestError5 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
                                 if (textRequestError5 == "") {
-                                    textResponceError5 = response.body().string();
+                                    if (response.body().string() == "") {
+                                        textResponceError5 = "Відповідь response.body() пуста";
+                                    } else {
+                                        textResponceError5 = response.body().string();
+                                    }
                                 }
                             } else {
                                 requestError5 = false;
                                 textRequestError5 = "";
                                 kodRequest5 = StringUtils.substringBetween(response.body().string(), "reqinfo reqid=\"", "\"");
                                 if (kodRequest5 == "") {
-                                    textResponceError5 = response.body().string();
+                                    if (response.body().string() == "") {
+                                        textResponceError5 = "Відповідь response.body() пуста";
+                                    } else {
+                                        textResponceError5 = response.body().string();
+                                    }
                                 }
 
                             }
@@ -552,7 +572,11 @@ public class TestSh11_ListINNSimulation extends Simulation {
                             textRequestError5 = String.valueOf(response.status().code());
                             statusCodeNot200 = true;
                             if (textRequestError5 == "") {
-                                textResponceError5 = response.body().string();
+                                if (response.body().string() == "") {
+                                    textResponceError5 = "Відповідь response.body() пуста";
+                                } else {
+                                    textResponceError5 = response.body().string();
+                                }
                             }
                         }
                         requestTime5 = LocalDateTime.now();
@@ -595,14 +619,22 @@ public class TestSh11_ListINNSimulation extends Simulation {
                                 requestError6 = true;
                                 textRequestError6 = StringUtils.substringBetween(response.body().string(), "errtype=\"", "\"");
                                 if (textRequestError6 == "") {
-                                    textResponceError6 = response.body().string();
+                                    if (response.body().string() == "") {
+                                        textResponceError6 = "Відповідь response.body() пуста";
+                                    } else {
+                                        textResponceError6 = response.body().string();
+                                    }
                                 }
                             } else {
                                 requestError6 = false;
                                 textRequestError6 = "";
                                 kodRequest6 = StringUtils.substringBetween(response.body().string(), "reqinfo reqid=\"", "\"");
                                 if (kodRequest6 == "") {
-                                    textResponceError6 = response.body().string();
+                                    if (response.body().string() == "") {
+                                        textResponceError6 = "Відповідь response.body() пуста";
+                                    } else {
+                                        textResponceError6 = response.body().string();
+                                    }
                                 }
 
 
@@ -615,7 +647,11 @@ public class TestSh11_ListINNSimulation extends Simulation {
                             textRequestError6 = String.valueOf(response.status().code());
                             statusCodeNot200 = true;
                             if (textRequestError6 == "") {
-                                textResponceError6 = response.body().string();
+                                if (response.body().string() == "") {
+                                    textResponceError6 = "Відповідь response.body() пуста";
+                                } else {
+                                    textResponceError6 = response.body().string();
+                                }
                             }
                         }
                         requestTime6 = LocalDateTime.now();
